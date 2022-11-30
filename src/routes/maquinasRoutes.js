@@ -4,6 +4,7 @@ import MaquinaController from "../controllers/maquinasController.js";
 const router = express.Router();
 
 router
+
   .get("/maquinas", MaquinaController.listarMaquinas)
   .get("/maquinas/:id", MaquinaController.listarMaquinaPorId)
   .post("/maquinas", MaquinaController.cadastrarMaquina)
