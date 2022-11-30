@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 
 const logMaquinaSchema = new mongoose.Schema({
   id: { type: String },
-  idMaquina: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "maquinas",
-    required: true,
-  },
+  idMaquina: { type: String, required: true },
   data_hr: { type: Date, required: true },
   temperatura: { type: Number, required: true },
   ruido: { type: Number, required: true },
