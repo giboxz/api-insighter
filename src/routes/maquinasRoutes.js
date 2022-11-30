@@ -1,0 +1,13 @@
+import express from "express";
+import MaquinaController from "../controllers/maquinasController.js";
+
+const router = express.Router();
+
+router
+  .get("/maquinas", MaquinaController.listarMaquinas)
+  .get("/maquinas/:id", MaquinaController.listarLivroPorId)
+  .post("/maquinas", MaquinaController.cadastrarMaquina)
+  .put("/maquinas/:id", MaquinaController.atualizarMaquina)
+  .delete("/maquinas/:id", MaquinaController.excluirMaquina);
+
+export default router;
