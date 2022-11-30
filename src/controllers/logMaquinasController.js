@@ -1,3 +1,4 @@
+import { json } from "express";
 import logMaquinas from "../models/LogMaquina.js";
 
 class LogMaquinaController {
@@ -46,14 +47,16 @@ class LogMaquinaController {
     );
   };
 
-  static listarLogMaquinaComAnomalia = (req, res) => {
-    logMaquinas.aggregate(
-      [
-        { $sort: { date: -1 } },
+  static listarLogMaquinaComAnomalia = async (req, res) => {
+    try {
+      let sortedProperties = await logMaquinas.aggregate([
+        {
+          $sort: { data_hr: -1 },
+        },
         {
           $group: {
             _id: "$idMaquina",
-            id: { $first: "$_id" },
+            idLog: { $first: "$_id" },
             data_hr: { $first: "$data_hr" },
             temperatura: { $first: "$temperatura" },
             ruido: { $first: "$ruido" },
@@ -61,11 +64,11 @@ class LogMaquinaController {
             anomalia: { $first: "$anomalia" },
           },
         },
-      ],
-      function (err, logMaquinas) {
-        res.status(200).json(logMaquinas);
-      }
-    );
+      ]);
+      res.status(200).send(sortedProperties);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   static cadastrarLogMaquina = (req, res) => {

@@ -7,7 +7,7 @@ class MaquinaController {
     });
   };
 
-  static listarLivroPorId = (req, res) => {
+  static listarMaquinaPorId = (req, res) => {
     const id = req.params.id;
 
     maquinas.findById(id, (err, maquinas) => {
